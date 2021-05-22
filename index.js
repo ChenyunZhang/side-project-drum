@@ -1,10 +1,24 @@
 document.querySelectorAll(".drum").forEach(
     button => button.addEventListener("click", handleClick))
-document.addEventListener("keydown",function(e){
+
+document.addEventListener("keydown", function (e) {
     makeSound(e.key)
+    buttonAnimation(e.key)
 });
 
-function makeSound(key){
+function handleClick(e) {
+    makeSound(e.target.innerHTML)
+    buttonAnimation(e.target.innerHTML)
+}
+
+function buttonAnimation(currentKey) {
+    const activeButton = document.querySelector("." + currentKey)
+    activeButton.classList.add("pressed")
+    setTimeout(function () { activeButton.classList.remove("pressed") }, 100);
+}
+
+
+function makeSound(key) {
     let audio
     switch (key) {
         case "w":
@@ -37,6 +51,3 @@ function makeSound(key){
     }
 }
 
-function handleClick(e) {
-    makeSound(e.target.innerHTML)
-}
